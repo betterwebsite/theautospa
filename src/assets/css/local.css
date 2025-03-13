@@ -6,6 +6,7 @@
 @media only screen and (min-width: 0rem) {
   #sbs {
     padding: var(--sectionPadding);
+    padding-top: calc(654 / 16 * 1rem);
   }
   #sbs .cs-container {
     display: flex;
@@ -121,6 +122,9 @@
 }
 /* Desktop - 1024px */
 @media only screen and (min-width: 64rem) {
+  #sbs {
+    padding-top: calc(230 / 16 * 1rem);
+  }
   #sbs .cs-container {
     flex-flow: row;
     justify-content: space-between;
