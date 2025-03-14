@@ -24,76 +24,356 @@ eleventyNavigation:
     <section id="int-hero">
         <h1 id="home-h">Contact Us</h1>
         <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/cabinets2-m.jpg">
-            <source media="(min-width: 601px)" srcset="/assets/images/cabinets2.jpg">
-            <img aria-hidden="true" decoding="async" src="/assets/images/cabinets2.jpg" alt="kitchen cabinets" loading="eager" width="2500" height="1667">
+            <source media="(max-width: 600px)" srcset="/assets/images/audi.jpg">
+            <source media="(min-width: 601px)" srcset="/assets/images/audi.jpg">
+            <img aria-hidden="true" decoding="async" src="/assets/images/audi.jpg" alt="kitchen cabinets" loading="eager" width="2500" height="1667">
         </picture>
     </section>
 
-    <!-- ============================================ -->
-    <!--                Contact Form                  -->
-    <!-- ============================================ -->
+    
+<!-- ============================================ -->
+<!--                   Contact                    -->
+<!-- ============================================ -->
+<!-- Include jQuery and CarQuery API script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+    select {
+  appearance: none;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  width: fit-content !important;
+  padding: 1em;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
 
-    <section id="cs-contact">
-        <div class="cs-container">
-            <form id="cs-form" name="Contact Form" method="post">
-                <div class="cs-content">
-                    <span class="cs-topper">Contact</span>
-                    <h2 class="cs-title">Get in Touch</h2>
-                    <p class="cs-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ridiculus elementum ullamcorper ipsum porttitor aliquam. Id magna urna ultrices odio pulvinar. Sed ut.
-                    </p>
-                </div>
-                <label>
+  z-index: 1;
+
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  outline: none;
+}
+
+.select {
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  position: relative;
+
+  select,
+  &::after {
+    grid-area: select;
+  }
+
+  min-width: 15ch;
+  max-width: 30ch;
+
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1.1;
+
+
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+
+  &:not(.select--multiple)::after {
+    content: "";
+    justify-self: end;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+  }
+}
+
+select:focus + .focus {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 2px solid var(--select-focus);
+  border-radius: inherit;
+}
+
+select[multiple] {
+  padding-right: 0;
+
+  /*
+   * Safari will not reveal an option
+   * unless the select height has room to 
+   * show all of it
+   * Firefox and Chrome allow showing 
+   * a partial option
+   */
+  height: 6rem;
+
+  option {
+    white-space: normal;
+
+    outline-color: var(--select-focus);
+  }
+</style>
+<script>
+    $(document).ready(function(){
+        // Function to update hidden inputs with the current select values.
+        function updateHiddenInputs(){
+            $('#hidden-year').val($('#car-years').val());
+            $('#hidden-make').val($('#car-makes').val());
+            $('#hidden-model').val($('#car-models').val());
+        }
+        
+        // Populate the Year dropdown (from currentYear + 2 to 1950)
+        const currentYear = new Date().getFullYear();
+        for (let y = currentYear + 2; y >= 1950; y--) {
+            $('#car-years').append(`<option value="${y}">${y}</option>`);
+        }
+        
+        // Define popular makes (in uppercase)
+        const popularMakes = [
+            "TOYOTA", "HONDA", "FORD", "CHEVROLET", "NISSAN",
+            "BMW", "MERCEDES-BENZ", "VOLKSWAGEN", "AUDI", "KIA",
+            "HYUNDAI", "SUBARU", "MAZDA", "DODGE", "JEEP",
+            "LEXUS", "ACURA", "INFINITI", "GMC", "CADILLAC",
+            "PORSCHE", "LAND ROVER", "JAGUAR", "VOLVO", "MITSUBISHI", "FIAT"
+        ];
+        
+        // Populate the Makes dropdown using the NHTSA API, filtering for popular makes.
+        $.getJSON("https://vpic.nhtsa.dot.gov/api/vehicles/GetAllMakes?format=json", function(data){
+            if(data && data.Results) {
+                data.Results.forEach(function(makeObj){
+                    if (popularMakes.includes(makeObj.Make_Name.toUpperCase())) {
+                        $('#car-makes').append(`<option value="${makeObj.Make_Name.toUpperCase()}">${makeObj.Make_Name.toUpperCase()}</option>`);
+                    }
+                });
+            }
+        });
+        
+        // Function to update the Models dropdown based on selected year and make.
+        // Optionally preselects a model if provided.
+        function updateModels(selectedModel = null){
+            const year = $('#car-years').val();
+            const make = $('#car-makes').val();
+            $('#car-models').empty().append(`<option value="">-- Select Model --</option>`);
+            if(year && make) {
+                $.getJSON(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${make}/modelyear/${year}?format=json`, function(data){
+                    if(data && data.Results && data.Results.length > 0){
+                        data.Results.forEach(function(model){
+                            $('#car-models').append(`<option value="${model.Model_Name}">${model.Model_Name}</option>`);
+                        });
+                        if(selectedModel){
+                            if($('#car-models option[value="'+selectedModel+'"]').length === 0){
+                                $('#car-models').append(`<option value="${selectedModel}">${selectedModel}</option>`);
+                            }
+                            $('#car-models').val(selectedModel);
+                        }
+                    } else {
+                        $('#car-models').append(`<option value="">No models found</option>`);
+                    }
+                    // Update hidden inputs after models load.
+                    updateHiddenInputs();
+                });
+            } else {
+                updateHiddenInputs();
+            }
+        }
+        
+        // Update hidden inputs when a dropdown value changes.
+        $('#car-years').on('change', function(){
+            updateHiddenInputs();
+            updateModels();
+        });
+        $('#car-makes').on('change', function(){
+            updateHiddenInputs();
+            updateModels();
+        });
+        $('#car-models').on('change', updateHiddenInputs);
+        
+        // VIN lookup: decode VIN and auto-update year, make, and model.
+        $('#vinLookup').on('click', function(){
+            const vin = $('#vin-323').val().trim();
+            if(vin){
+                $.getJSON(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/${vin}?format=json`, function(data){
+                    if(data && data.Results && data.Results.length > 0){
+                        const result = data.Results[0];
+                        const modelYear = result.ModelYear;
+                        let make = result.Make;
+                        const model = result.Model;
+                        
+                        // Convert make to uppercase.
+                        if(make) {
+                            make = make.toUpperCase();
+                        }
+                        
+                        // Update Year dropdown.
+                        if(modelYear){
+                            if($('#car-years option[value="'+modelYear+'"]').length === 0){
+                                $('#car-years').append(`<option value="${modelYear}">${modelYear}</option>`);
+                            }
+                            $('#car-years').val(modelYear);
+                        } else {
+                            $('#car-years').val("");
+                        }
+                        
+                        // Update Make dropdown if the VIN's make is popular.
+                        if(make && popularMakes.includes(make)){
+                            if($('#car-makes option[value="'+make+'"]').length === 0){
+                                $('#car-makes').append(`<option value="${make}">${make}</option>`);
+                            }
+                            $('#car-makes').val(make);
+                        } else {
+                            $('#car-makes option').each(function(){
+                                if(!popularMakes.includes($(this).val())){
+                                    $(this).remove();
+                                }
+                            });
+                            $('#car-makes').val("");
+                        }
+                        
+                        // Update hidden fields for Year and Make.
+                        updateHiddenInputs();
+                        
+                        // Update Models dropdown with the VIN's model if valid.
+                        if(model && make && popularMakes.includes(make)){
+                            updateModels(model);
+                        } else {
+                            $('#car-models').empty().append(`<option value="">-- Select Model --</option>`);
+                            updateHiddenInputs();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
+<section id="contact-323">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Automotive Style</span>
+            <h2 class="cs-title">Fill Us In</h2>
+            <p class="cs-text">
+                From custom paint to lighting and tint, let us know what you need and we will get it done!
+            </p>
+            <!--Form-->
+            <form class="cs-form" id="cs-form-323" name="Contact Form" method="post" netlify>
+                <label class="cs-label">
                     Name
-                    <input required type="text" id="name" name="name" placeholder="Name">
+                    <input class="cs-input" required type="text" id="name-323" name="name" placeholder="Name">
                 </label>
-                <label>
+                <label class="cs-label cs-email">
                     Email
-                    <input required type="text" id="email" name="email" placeholder="Email">
+                    <input class="cs-input" required type="text" id="email-323" name="email" placeholder="Email">
                 </label>
-                <label>
+                <label class="cs-label cs-phone">
                     Phone
-                    <input required type="text" id="phone" name="phone" placeholder="Phone">
+                    <input class="cs-input" required type="text" id="phone-323" name="phone" placeholder="Phone">
                 </label>
-                <label>
-                    How Did You Find Us
-                    <input type="text" id="find" name="find-us" placeholder="How did you find us?">
+                <label class="cs-label cs-email" for="car-years">
+                    Select Year
+                    <select class="cs-label" id="car-years" placeholder="Select Year*">
+                        <option value="">-- Select Year --</option>
+                    </select>
+                    <!-- Hidden input for Year -->
+                    <input type="hidden" id="hidden-year" name="car_year" value="">
                 </label>
-                <label class="cs-label-message">
+                <label class="cs-label cs-phone" for="car-makes">
+                    Select Make
+                    <select class="cs-label" id="car-makes">
+                        <option value="">-- Select Make --</option>
+                    </select>
+                    <!-- Hidden input for Make -->
+                    <input type="hidden" id="hidden-make" name="car_make" value="">
+                </label>
+                <label class="cs-label" for="car-models">
+                    Select Model
+                    <select class="cs-label" id="car-models">
+                        <option selected value="">-- Select Model --</option>
+                    </select>
+                    <!-- Hidden input for Model -->
+                    <input type="hidden" id="hidden-model" name="car_model" value="">
+                </label>
+                <label class="cs-label" for="car-models">
+                    Can't Find Your Car? Try the VIN Lookup
+                </label>
+                <!-- VIN Lookup Field -->
+                <label class="cs-label cs-phone">
+                    <div style="display: flex;flex-direction: column;">
+                        <input class="cs-input" type="text" id="vin-323" name="vin" placeholder="Enter VIN">
+                        <button type="button" id="vinLookup" style="margin-top: 1rem;outline: 0;cursor: pointer;border-radius: 6px;border: 2px solid #ff2419;color: #ff2419;background: 0 0;padding: 8px;box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;font-weight: 800;font-size: 16px;height: 42px;">
+                            SEARCH
+                        </button>
+                    </div>
+                </label>
+                <label class="cs-label">
                     Message
-                    <textarea required name="Message" id="message" placeholder="Write message..."></textarea>
+                    <textarea class="cs-input cs-textarea" required name="Message" id="message-323" placeholder="Write About Your Service Needs..."></textarea>
                 </label>
-                <button class="cs-button-solid" type="submit">Submit Message</button>
+                <button class="cs-button-solid cs-submit" type="submit" style="background-color:#ff2419;">Make an Appointment</button>
             </form>
-            <div class="cs-right-section">
-                <!--Email-->
-                <span class="cs-header">Email</span>
-                <a class="cs-link" href="mailto:{{client.email}}">{{client.email}}</a>
-                <!--Phone-->
-                <span class="cs-header">Phone</span>
-                <a class="cs-link" href="tel:{{client.phoneForTel}}">{{client.phoneFormatted}}</a>
-                <!--Address-->
-                <span class="cs-header">Address</span>
-                <a class="cs-link" href="{{client.address.mapLink}}">
-                    {{client.address.lineOne}},
-                    <br/>
-                    {{client.address.lineTwo}},
-                    <br/>
-                    <span class="cs-block">
-                        {{client.address.city}}
-                        {{client.address.state}}
-                        {{client.address.zip}}
-                    </span>
-                </a>
-
-                <!-- Background Image-->
-                <picture class="cs-bg-picture">
-                    <source media="(min-width: 601px)" srcset="/assets/images/skyscraper.jpg">
-                    <img aria-hidden="true" decoding="async" src="/assets/images/skyscraper.jpg" alt="building" loading="lazy" width="2500" height="1667">
-                </picture>
-
-            </div>
         </div>
-    </section>
+        <!--Map Image, pin is made in the Figma then export as one image-->
+        <picture style="height: auto;aspect-ratio: 430 / 700;">
+
+            <div class="panning-image" style="border-radius: 10px;margin: auto;margin-top: 11rem;"></div>
+
+            <style>
+                .panning-image {
+                    width: var(--form-width,430px); /* Visible area */
+                    height: var(--form-height,700px);
+                    background: url("/assets/images/gif.jpg") repeat-x; /* Ensure wide enough image */
+                    background-size: cover;
+                    animation: panImage 30s linear infinite alternate;
+                }
+
+                @keyframes panImage {
+                    from { background-position: 0 0; }
+                    to { background-position: 100% 0; } /* Moves left */
+                }
+            </style>
+            <script>
+                function updateImageSize() {
+                    const form = document.querySelector(".cs-form");
+                    const panningImage = document.querySelector(".panning-image");
+            
+                    if (form && panningImage) {
+                        const formWidth = form.offsetWidth + "px";
+                        const formHeight = form.offsetHeight + "px";
+            
+                        // Apply to CSS variables
+                        document.documentElement.style.setProperty("--form-width", formWidth);
+                        document.documentElement.style.setProperty("--form-height", formHeight);
+                    }
+                }
+            
+                // Run on load & window resize
+                window.addEventListener("load", updateImageSize);
+                window.addEventListener("resize", updateImageSize);
+            </script>
+
+            <!-- <video style="aspect-ratio: 430 / 700;" loading="lazy" src="https://ik.imagekit.io/betterwebsite/theautospallc/windshield.mp4" autoplay="true" muted></video> -->
+
+
+            <!-- <script src="https://fast.wistia.com/player.js" async></script><script src="https://fast.wistia.com/embed/d0zqg6rktc.js" async type="module"></script><style>wistia-player[media-id='d0zqg6rktc']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/d0zqg6rktc/swatch'); display: block; filter: blur(5px); padding-top:177.78%; }</style> <wistia-player media-id="d0zqg6rktc" aspect="0.5625"></wistia-player> -->
+            <!-- <source media="(max-width: 600px)" srcset="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/map+pin.png">
+            <source media="(min-width: 601px)" srcset="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/map+pin.png">
+            <img decoding="async" src="https://csimg.nyc3.digitaloceanspaces.com/Contact-Page/map+pin.png" alt="map" width="610" height="425" aria-hidden="true"> -->
+        </picture>
+    </div>
+</section>
+
+
+
 {% endblock %}
