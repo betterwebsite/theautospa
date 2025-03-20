@@ -24,9 +24,9 @@ eleventyNavigation:
     <section id="int-hero">
         <h1 id="home-h">Contact Us</h1>
         <picture>
-            <source media="(max-width: 600px)" srcset="/assets/images/audi.jpg">
-            <source media="(min-width: 601px)" srcset="/assets/images/audi.jpg">
-            <img aria-hidden="true" decoding="async" src="/assets/images/audi.jpg" alt="kitchen cabinets" loading="eager" width="2500" height="1667">
+            <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/audi.jpg' | webp %}">
+            <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/audi.jpg' | webp %}">
+            <img aria-hidden="true" decoding="async" src="{% getUrl '/assets/images/audi.jpg' | webp %}" alt="kitchen cabinets" loading="eager" width="2500" height="1667">
         </picture>
     </section>
 
@@ -312,8 +312,8 @@ select[multiple] {
                 <label class="cs-label cs-phone">
                     <div style="display: flex;flex-direction: column;">
                         <input class="cs-input" type="text" id="vin-323" name="vin" placeholder="Enter VIN">
-                        <button type="button" id="vinLookup" style="margin-top: 1rem;outline: 0;cursor: pointer;border-radius: 6px;border: 2px solid #ff2419;color: #ff2419;background: 0 0;padding: 8px;box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;font-weight: 800;font-size: 16px;height: 42px;">
-                            SEARCH
+                        <button type="button" id="vinLookup" style="box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%);margin-top: 1rem;outline: 0;cursor: pointer;border-radius: 6px;border: 2px solid #da3838;color: #da3838;background: 0 0;padding: 8px;box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;font-weight: 800;font-size: 16px;height: 42px;">
+                            SEARCH VIN
                         </button>
                     </div>
                 </label>
@@ -321,7 +321,7 @@ select[multiple] {
                     Message
                     <textarea class="cs-input cs-textarea" required name="Message" id="message-323" placeholder="Write About Your Service Needs..."></textarea>
                 </label>
-                <button class="cs-button-solid cs-submit" type="submit" style="background-color:#ff2419;">Make an Appointment</button>
+                <button class="cs-button-solid cs-submit" type="submit" style="background-color:#da3838;box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%);">Make an Appointment</button>
             </form>
         </div>
         <!--Map Image, pin is made in the Figma then export as one image-->

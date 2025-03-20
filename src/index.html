@@ -1,7 +1,7 @@
 ---
 title: 'The Autospa LLC | Home | Oklahoma City, OK'
 description: 'Meta description for the page'
-preloadImg: '/assets/images/landing.jpg'
+preloadImg: ''
 permalink: '/'
 tags: 'sitemap' # Sitemap will use all pages in content/, due to content.json. As index.html is not included in content/ we need to manually add the sitemap tag to this page (only).
 eleventyNavigation:
@@ -95,7 +95,7 @@ Doing this will complete the overlapping "breaking the container" look.
             <p class="cs-text">
                 Auto detailing services you can depend on
             </p>
-            <a href="" class="cs-button-solid">Get A Quote</a>
+            <a href="/contact" class="cs-button-solid">Get A Quote</a>
         </div>
         <ul class="cs-card-group">
             <li class="cs-item">
@@ -106,9 +106,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     </p>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/coating.jpg">
-                    <source media="(min-width: 601px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/coating.jpg">
-                    <img decoding="async" src="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/coating.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/coating.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/coating.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/coating.jpg' | resize({ width: 600, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -119,9 +119,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     </p>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/porsche.jpg">
-                    <source media="(min-width: 601px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/porsche.jpg">
-                    <img decoding="async" src="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/porsche.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/porsche.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/porsche.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/porsche.jpg' | resize({ width: 600, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -132,9 +132,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     </p>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/paint.jpg">
-                    <source media="(min-width: 601px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/paint.jpg">
-                    <img decoding="async" src="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/paint.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/paint.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/paint.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/paint.jpg' | resize({ width: 600, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -145,9 +145,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     </p>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/clear.jpg">
-                    <source media="(min-width: 601px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/clear.jpg">
-                    <img decoding="async" src="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/clear.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/clear.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/clear.jpg' | resize({ width: 600, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/clear.jpg' | resize({ width: 600, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
         </ul>
@@ -155,9 +155,9 @@ Doing this will complete the overlapping "breaking the container" look.
 
     <!-- Background Image, there's a background image in the CSS for the parallax effect you'll need to change as well if you swap out our images -->
     <picture class="cs-background">
-        <source media="(max-width: 600px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/fer.jpg?updatedAt=1741883687195">
-        <source media="(min-width: 601px)" srcset="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/fer.jpg?updatedAt=1741883687195">
-        <img decoding="async" src="https://ik.imagekit.io/betterwebsite/BetterWebsite/theautospallc/fer.jpg?updatedAt=1741883687195" alt="construction" width="2250" height="1500" aria-hidden="true">
+        <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/fer.jpg' | resize({ width: 1000, height:600}) | webp %}">
+        <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/fer.jpg' | resize({ width: 1000, height:600}) | webp %}">
+        <img decoding="async" src="{% getUrl '/assets/images/fer.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="construction" width="2250" height="1500" aria-hidden="true">
     </picture>
 </section>
                                 
@@ -171,14 +171,14 @@ Doing this will complete the overlapping "breaking the container" look.
             <!-- Left Image Section -->
             <div class="cs-left">
                 <picture class="cs-picture cs-picture1">
-                    <source media="(max-width: 600px)" srcset="/assets/images/back.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/back.jpg">
-                    <img aria-hidden="true" decoding="async" src="/assets/images/back.jpg" alt="cabinets" loading="lazy" width="400" height="563">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/back.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/back.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img aria-hidden="true" decoding="async" src="{% getUrl '/assets/images/back.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="cabinets" loading="lazy" width="400" height="563">
                 </picture>
                 <picture class="cs-picture cs-picture2">
-                    <source media="(max-width: 600px)" srcset="/assets/images/front.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/front.jpg">
-                    <img aria-hidden="true" decoding="async" src="/assets/images/front.jpg" alt="house" loading="lazy" width="400" height="563">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/front.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/front.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img aria-hidden="true" decoding="async" src="{% getUrl '/assets/images/front.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="house" loading="lazy" width="400" height="563">
                 </picture>
             </div>
             <!-- Right Content Section-->
@@ -231,9 +231,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     <h3 class="cs-h3">Ceramic Coatings</h3>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="/assets/images/ceramic.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/ceramic.jpg">
-                    <img decoding="async" src="/assets/images/ceramic.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/ceramic.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/ceramic.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/ceramic.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -241,9 +241,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     <h3 class="cs-h3">New Car Preparation</h3>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="/assets/images/newcar.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/newcar.jpg">
-                    <img decoding="async" src="/assets/images/newcar.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/newcar.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/newcar.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/newcar.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -251,9 +251,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     <h3 class="cs-h3">Paint Correction</h3>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="/assets/images/paintcorrection.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/paintcorrection.jpg">
-                    <img decoding="async" src="/assets/images/paintcorrection.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/paintcorrection.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/paintcorrection.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/paintcorrection.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -261,9 +261,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     <h3 class="cs-h3">Dry Ice Blasting</h3>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="/assets/images/dryice.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/dryice.jpg">
-                    <img decoding="async" src="/assets/images/dryice.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/dryice.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/dryice.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/dryice.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
             <li class="cs-item">
@@ -271,9 +271,9 @@ Doing this will complete the overlapping "breaking the container" look.
                     <h3 class="cs-h3">Detailing</h3>
                 </a>
                 <picture class="cs-item-background">
-                    <source media="(max-width: 600px)" srcset="/assets/images/detailing.jpg">
-                    <source media="(min-width: 601px)" srcset="/assets/images/detailing.jpg">
-                    <img decoding="async" src="/assets/images/detailing.jpg" alt="construction" width="413" height="374" aria-hidden="true">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/detailing.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/detailing.jpg' | resize({ width: 1000, height:600}) | webp %}">
+                    <img decoding="async" src="{% getUrl '/assets/images/detailing.jpg' | resize({ width: 1000, height:600}) | webp %}" alt="construction" width="413" height="374" aria-hidden="true">
                 </picture>
             </li>
         </ul>
@@ -317,9 +317,9 @@ Doing this will complete the overlapping "breaking the container" look.
             </li>
             <li class="cs-item cs-item-picture">
                 <picture class="cs-picture">
-                    <source media="(max-width: 600px)" srcset="/assets/images/review1.png">
-                    <source media="(min-width: 601px)" srcset="/assets/images/review1.png">
-                    <img loading="lazy" decoding="async" src="/assets/images/review1.png" alt="body builder" width="630" height="877">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/review1.png' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/review1.png' | resize({ width: 1000, height:600}) | webp %}">
+                    <img loading="lazy" decoding="async" src="{% getUrl '/assets/images/review1.png' | resize({ width: 1000, height:600}) | webp %}" alt="body builder" width="630" height="877">
                 </picture>
             </li>
             <li class="cs-item">
@@ -332,9 +332,9 @@ Doing this will complete the overlapping "breaking the container" look.
             </li>
             <li class="cs-item cs-item-picture">
                 <picture class="cs-picture">
-                    <source media="(max-width: 600px)" srcset="/assets/images/review2.png">
-                    <source media="(min-width: 601px)" srcset="/assets/images/review2.png">
-                    <img loading="lazy" decoding="async" src="/assets/images/review2.png" alt="body builder" width="630" height="877">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/review2.png' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/review2.png' | resize({ width: 1000, height:600}) | webp %}">
+                    <img loading="lazy" decoding="async" src="{% getUrl '/assets/images/review2.png' | resize({ width: 1000, height:600}) | webp %}" alt="body builder" width="630" height="877">
                 </picture>
             </li>
             <li class="cs-item">
@@ -347,9 +347,9 @@ Doing this will complete the overlapping "breaking the container" look.
             </li>
             <li class="cs-item cs-item-picture">
                 <picture class="cs-picture">
-                    <source media="(max-width: 600px)" srcset="/assets/images/review3.png">
-                    <source media="(min-width: 601px)" srcset="/assets/images/review3.png">
-                    <img loading="lazy" decoding="async" src="/assets/images/review3.png" alt="body builder" width="630" height="877">
+                    <source media="(max-width: 600px)" srcset="{% getUrl '/assets/images/review3.png' | resize({ width: 1000, height:600}) | webp %}">
+                    <source media="(min-width: 601px)" srcset="{% getUrl '/assets/images/review3.png' | resize({ width: 1000, height:600}) | webp %}">
+                    <img loading="lazy" decoding="async" src="{% getUrl '/assets/images/review3.png' | resize({ width: 1000, height:600}) | webp %}" alt="body builder" width="630" height="877">
                 </picture>
             </li>
             <li class="cs-item">

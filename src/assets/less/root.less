@@ -244,6 +244,7 @@
 @media only screen and (min-width: 0rem) {
     body.dark-mode {
         #dark-mode-toggle {
+            padding-right: 4rem;
             .cs-sun {
                 opacity: 1;
                 transform: translate(-50%, -50%);
@@ -254,6 +255,11 @@
                 transform: translate(-50%, -150%);
                 fill: #fff;
             }
+        }
+    }
+    body{
+        #dark-mode-toggle {
+            padding-right: 4rem;
         }
     }
 
@@ -268,7 +274,8 @@
         height: (48/16rem);
         width: (48/16rem);
         overflow: hidden;
-        padding: 0;
+        // padding: 0;
+        padding-right: 4rem;
 
         img,
         svg {

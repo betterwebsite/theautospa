@@ -204,6 +204,9 @@
 <--- -------------------------- -*/
 /* Mobile - 360px */
 @media only screen and (min-width: 0rem) {
+  body.dark-mode #dark-mode-toggle {
+    padding-right: 4rem;
+  }
   body.dark-mode #dark-mode-toggle .cs-sun {
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -212,6 +215,9 @@
     opacity: 0;
     transform: translate(-50%, -150%);
     fill: #fff;
+  }
+  body #dark-mode-toggle {
+    padding-right: 4rem;
   }
   #dark-mode-toggle {
     z-index: 1000;
@@ -224,7 +230,7 @@
     height: 3rem;
     width: 3rem;
     overflow: hidden;
-    padding: 0;
+    padding-right: 4rem;
   }
   #dark-mode-toggle img,
   #dark-mode-toggle svg {
